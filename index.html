@@ -389,7 +389,7 @@
   <div class="hero-body">
     <div class="container">
       <!-- Paper video. -->
-      <h2 class="title is-3">Generation Results</h2>
+      <h2 class="title is-3">Non-Causal Generation Results</h2>
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
           
@@ -407,15 +407,15 @@
               <!-- <p>Caption for video 2</p> -->
             </div>
           </div>
-          <p>As theoretically predicted, ABC's inductive biases of time-adaptive volatility and data-to-data transitions provide clear benefits over competing methods that lack these characteristics. The autoregressively conditioned diffusion bridges have flickering artifacts (due to the one-size-fits-all volatility coefficient), while the noise-to-data diffusion is incoherent.</p>
+          <p>Infilling results, with prompt every eight frames. As theoretically predicted, ABC's inductive biases of time-adaptive volatility and data-to-data transitions provide clear benefits over competing methods that lack these characteristics. The autoregressively conditioned diffusion bridges have flickering artifacts (due to the one-size-fits-all volatility coefficient), while the noise-to-data diffusion is incoherent.</p>
           <details style="margin-top: 1rem; text-align: left;">
             <summary style="cursor: pointer; font-weight: bold; font-size: 1.1rem;">
               Video Generation Parameters
             </summary>
             <div style="padding: 1rem;">
               <ul>
-                <li><strong>Sky Videos:</strong> Latent diffusion on <a href="https://github.com/zhangzjn/DTVNet">Sky-Timelapse dataset</a>. Top row is Ground Truth; second row is ABC (&sigma; = 0.4, no Brownian Bridge); third row is Autoregressively Chained Diffusion Bridges (&sigma; = 0.4); fourth row is Noise-to-Data Diffusion (exponentially decaying noise, B=4.0, K=2.5). Generate 32 frames, with ground truth conditioning given at every eight frames, plus the final frame. We allow overwriting of the conditioning frames by the SDEs, to test the consistency of the model trajectory at conditioning times. Samples are generated with 250 discretziation steps of the SDE.</li>
-                <li><strong>Talking Head Videos:</strong> Latent diffusion on <a href="https://celebv-hq.github.io/">CelebV-HQ dataset</a>. Top row is Ground Truth; second row is ABC (&sigma; = 0.5, no Brownian Bridge); third row is Autoregressively Chained Diffusion Bridges (&sigma; = 0.5); fourth row is Noise-to-Data Diffusion (cosine decaying noise, &alpha; = 3.0, &epsilon; = 0.04). Generate 32 frames, with ground truth conditioning given at every four frames, plus the final frame. We teacher force on the conditioning frames. Samples are generated with 250 discretziation steps of the SDE.</li>
+                <li><strong>Sky Videos:</strong> Latent diffusion on <a href="https://github.com/zhangzjn/DTVNet">Sky-Timelapse dataset</a>. Top row is Ground Truth; second row is ABC (&sigma; = 0.4, no Brownian Bridge); third row is Autoregressively Chained Diffusion Bridges (&sigma; = 0.4); fourth row is Noise-to-Data Diffusion (exponentially decaying noise, B=4.0, K=2.5). Generate 32 frames, with ground truth conditioning given at every eight frames, plus the final frame. We allow overwriting of the conditioning frames by the SDEs, to test the consistency of the model trajectory at conditioning times. Samples are generated with 250 discretziation steps of the SDE. All methods use same DiT architecture.</li>
+                <li><strong>Talking Head Videos:</strong> Latent diffusion on <a href="https://celebv-hq.github.io/">CelebV-HQ dataset</a>. Top row is Ground Truth; second row is ABC (&sigma; = 0.5, no Brownian Bridge); third row is Autoregressively Chained Diffusion Bridges (&sigma; = 0.5); fourth row is Noise-to-Data Diffusion (cosine decaying noise, &alpha; = 3.0, &epsilon; = 0.04). Generate 32 frames, with ground truth conditioning given at every four frames, plus the final frame. We teacher force on the conditioning frames. Samples are generated with 250 discretziation steps of the SDE. All methods use same DiT architecture.</li>
               </ul>
             </div>
           </details>
@@ -426,12 +426,45 @@
 </section>
 <!-- End youtube video -->
 
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <!-- Paper video. -->
+      <h2 class="title is-3">Causal Generation Results</h2>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          
+          <div class="columns is-centered is-variable is-8">
+            <div class="column is-5 has-text-centered">
+              <video style="width: 100%;" autoplay loop muted playsinline controls>
+                <source src="static/videos/CAUSAL_skytimelapse_stacked.mp4" type="video/mp4">
+              </video>
+              <!-- <p>Caption for video 1</p> -->
+            </div>
+          </div>
+          <p>Causal generation results, with prompt first four frames.</p>
+          <details style="margin-top: 1rem; text-align: left;">
+            <summary style="cursor: pointer; font-weight: bold; font-size: 1.1rem;">
+              Video Generation Parameters
+            </summary>
+            <div style="padding: 1rem;">
+              <ul>
+                <li><strong>Sky Videos:</strong> Latent diffusion on <a href="https://github.com/zhangzjn/DTVNet">Sky-Timelapse dataset</a>. Top row is Ground Truth; second row is ABC (&sigma; = 0.4, no Brownian Bridge); third row is Autoregressively Chained Diffusion Bridges (&sigma; = 0.4); fourth row is Noise-to-Data Diffusion (cosine decaying noise, &alpha;=3.0, &epsilon;=0.04). Generate 28 frames, conditioned on a 4-frame prefix. Samples are generated with 250 discretziation steps of the SDE. All methods use same DiT architecture.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <!-- Video carousel -->
 <!-- <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
-      <h2 class="title is-3">Another Carousel</h2>
+      <h2 class="title is-3">More Generation Results</h2>
       <div id="results-carousel" class="carousel results-carousel">
         <div class="item item-video1">
           <video poster="" id="video1" controls muted loop height="100%" preload="metadata">
