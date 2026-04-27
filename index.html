@@ -430,7 +430,7 @@
   <div class="hero-body">
     <div class="container">
       <!-- Paper video. -->
-      <h2 class="title is-3">Causal Generation Results</h2>
+      <h2 class="title is-3">Causal Generation and Alternative Prompting Strategies</h2>
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
           
@@ -439,17 +439,24 @@
               <video style="width: 100%;" autoplay loop muted playsinline controls>
                 <source src="static/videos/CAUSAL_skytimelapse_stacked.mp4" type="video/mp4">
               </video>
-              <!-- <p>Caption for video 1</p> -->
+              <p><b>Comparison of methods on causal generation results</b>, with prompt first four frames. As in the previous results, ABC is the best. Conditional diffusion bridges still suffer from flickering and texture loss artifacts, while the noise-to-data diffusion completely degenerates.</p>
+            </div>
+            <div class="column is-5 has-text-centered">
+              <video style="width: 100%;" autoplay loop muted playsinline controls>
+                <source src="static/videos/cond_ablation_stacked.mp4" type="video/mp4">
+              </video>
+              <p><b>Ablation on prompting strategy.</b> Full conditioning on path history is best. Conditioning on Monte Carlo sample of path trajectory displays temporal inconsistencies (first two columns implausibly reverse direction). Conditioning on only the most recent frame (plus initial frame) shares the temporal inconsistencies, plus artifacts from lack of history (third column's clouds dissolve, and fourth column's clouds lose texture). Conditioning on only eight-frame prefix without updating memory is worst.</p>
             </div>
           </div>
-          <p>Causal generation results, with prompt first four frames.</p>
+          <!--<p></p>-->
           <details style="margin-top: 1rem; text-align: left;">
             <summary style="cursor: pointer; font-weight: bold; font-size: 1.1rem;">
               Video Generation Parameters
             </summary>
             <div style="padding: 1rem;">
               <ul>
-                <li><strong>Sky Videos:</strong> Latent diffusion on <a href="https://github.com/zhangzjn/DTVNet">Sky-Timelapse dataset</a>. Top row is Ground Truth; second row is ABC (&sigma; = 0.4, no Brownian Bridge); third row is Autoregressively Chained Diffusion Bridges (&sigma; = 0.4); fourth row is Noise-to-Data Diffusion (cosine decaying noise, &alpha;=3.0, &epsilon;=0.04). Generate 28 frames, conditioned on a 4-frame prefix. Samples are generated with 250 discretziation steps of the SDE. All methods use same DiT architecture.</li>
+                <li><strong>Comparison of Methods on Causal Generation of Sky Videos (Left):</strong> Latent diffusion on <a href="https://github.com/zhangzjn/DTVNet">Sky-Timelapse dataset</a>. Top row is Ground Truth; second row is ABC (&sigma; = 0.4, no Brownian Bridge); third row is Autoregressively Chained Diffusion Bridges (&sigma; = 0.4); fourth row is Noise-to-Data Diffusion (cosine decaying noise, &alpha;=3.0, &epsilon;=0.04). Generate 28 frames, conditioned on a 4-frame prefix. Samples are generated with 250 discretziation steps of the SDE. All methods use same DiT architecture.</li>
+                <li><strong>Ablation on Prompting Strategy (Right):</strong> Also latent diffusion on Sky-Timelapse. Uses ABC (&sigma; = 0.4, no Brownian Bridge) for all frames, with prompting first eight frames in causal rollout, and 500 diffusion steps. Top row is full path autoregressive conditioning; second row is Monte Carlo sample (initial frame, most recent frame, and randomly selected frame in between) of the path trajectory as conditioning; third row is near-Markovian conditioning (initial frame and most recent frame); fourth row is prefix conditioning (first eight frames only).</li>
               </ul>
             </div>
           </details>
